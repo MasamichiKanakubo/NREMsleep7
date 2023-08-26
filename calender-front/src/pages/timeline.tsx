@@ -1,5 +1,5 @@
 import { FC } from "react";
-import './calendarStyle.module.css';
+import style from './calendarStyle.module.css';
 
 export const TIME_LIST = [
     { id: 0, time: "09:00" },
@@ -19,15 +19,6 @@ export const TIME_LIST = [
   ];
   
   export const HOUR_LIST = [
-    { hour: 0 },
-    { hour: 1 },
-    { hour: 2 },
-    { hour: 3 },
-    { hour: 4 },
-    { hour: 5 },
-    { hour: 6 },
-    { hour: 7 },
-    { hour: 8 },
     { hour: 9 },
     { hour: 10 },
     { hour: 11 },
@@ -41,8 +32,7 @@ export const TIME_LIST = [
     { hour: 19 },
     { hour: 20 },
     { hour: 21 },
-    { hour: 22 },
-    { hour: 23 }
+    { hour: 22 }
   ];
 
 type TimelineProps = {
@@ -63,7 +53,7 @@ export const Timeline: FC<TimelineProps> = ({ dayList }) => {
               onClick={() => {
                 console.log(date, `${hourList.hour}時`);
               }}
-              className="empty"
+              className={style.empty}
             />
           );
         })}
@@ -72,38 +62,38 @@ export const Timeline: FC<TimelineProps> = ({ dayList }) => {
   };
 
   return (
-    <div className="timeslotsContainer">
-      <div className="timeslotBox">
-        <ul className="timeslotList">
+    <div className={style.timeslotsContainer}>
+      <div className={style.timeslotBox}>
+        <ul className={style.timeslotList}>
           {TIME_LIST.map((timeItem) => {
             const splitedHour = Number(timeItem.time.split(":")[0]);
             const time = `${splitedHour}:${timeItem.time.split(":")[1]}`;
             return (
-              <li key={timeItem.id} className="timeslotItem">
+              <li key={timeItem.id} className={style.timeslotItem}>
                 {time}
               </li>
             );
           })}
         </ul>
       </div>
-      <div className="calendarContainer">
-        <div className="calendarWrapper">
+      <div className={style.calendarContainer}>
+        <div className={style.calendarWrapper}>
           <div>
             {TIME_LIST.map((timeItem) => (
               <div key={timeItem.id}>
-                <div className="horizontalHeight" />
+                <div className={style.horizontalHeight} />
               </div>
             ))}
           </div>
-          <div className="eventContainer">
+          <div className={style.eventContainer}>
             {dayList.map((dayItem, index) => {
               return (
                 <div
                   key={dayItem.date}
                   style={{ gridColumn: index + 1 }}
-                  className="calendarColumn"
+                  className={style.calendarColumn}
                 >
-                  <div className="date">
+                  <div className={style.date}>
                     {dayItem.date.split("-").at(1)}-
                     {dayItem.date.split("-").at(2)}
                   </div>

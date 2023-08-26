@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { FC } from "react";
 import { Timeline } from "./timeline";
+import style from './calendarStyle.module.css';
 
 export const WeeklyCalendar: FC = () => {
   const weekStartDayOffset = 0;
@@ -17,7 +18,7 @@ export const WeeklyCalendar: FC = () => {
     });
 
   return (
-    <div className="calendarContainer">
+    <div className={style.calendarContainer}>
       <Timeline dayList={dayList} />
     </div>
   );
