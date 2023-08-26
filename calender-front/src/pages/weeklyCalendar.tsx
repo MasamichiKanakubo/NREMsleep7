@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { FC } from "react";
 import { Timeline } from "./timeline";
 
-export const WeeklyCalendar: FC= () => {
+export const WeeklyCalendar: FC = () => {
   const weekStartDayOffset = 0;
   const _date = dayjs();
   const _day = _date.day();
