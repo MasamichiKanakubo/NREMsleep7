@@ -1,0 +1,121 @@
+.App {
+  position: absolute;
+  font-family: sans-serif;
+  text-align: center;
+  top: 60px;
+  left: 30px;
+}
+
+.timeslotsContainer {
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+}
+
+.calendarContainer {
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+}
+
+.timeslotList {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  top: 0px;
+  left: 25px;
+  display: flex;
+}
+
+.timeslotList>li {
+  list-style: none;
+  width: 63px;
+}
+
+.calendarWrapper {
+  min-width: 99.95%;
+  top: 10px;
+}
+
+.horizontalWrapper {
+  min-width: 100%;
+  flex: none;
+  vertical-align: top;
+}
+
+.horizontalHeight {
+  width: 60px;
+}
+
+.horizontalHeight::after {
+
+  width: 100%;
+  margin-top: 1px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.timesolotsBorderRight {
+  border: 1px solid #e6e6e6;
+  position: relative;
+  top: 2px;
+}
+
+.eventContainer {
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  height: 100%;
+  width: 70%;
+  min-width: 880px;
+  border: 1px solid #e6e6e6;
+}
+
+.calendarColumn {
+  border-top: 1px solid #e6e6e6;
+  z-index: 1;
+  display: flex;
+  position: relative;
+}
+
+.empty {
+  height: 100px;
+  width: 100%;
+  display: block;
+  border-right: 1px solid #e6e6e6;
+}
+
+.empty:hover {
+  cursor: pointer;
+  background: rgba(0, 162, 106, 0.04);
+}
+
+.dayslotList {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  align-items: flex-end;
+}
+
+.date {
+  list-style: none;
+  min-height: 60px;
+  padding-top: 40px;
+}
+
+.itemBox {
+  position: absolute;
+  cursor: pointer;
+}
+
+.item {
+  position: relative;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  margin-left: 2px;
+  padding: 3px;
+  border-radius: 5px;
+  border: 1px solid #ffffff;
+  font-size: 12px;
+  min-height: 10px;
+}
