@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import React from "react";
 import LoginButton from "@/components/loginbutton";
 
@@ -19,24 +19,26 @@ const LoginModel: React.FC<LoginModelProps> = ({ closeModal }) => {
     }
 
     const handleLogin = () => {
-        console.log('Name: ',userName);
-        console.log('ID: ',userId);
+        console.log('Name: ', userName);
+        console.log('ID: ', userId);
     }
 
     return (
-        <div　className="flex flex-col items-center justify-center">
-            <article className="bg-white">
-                <div className="rounded flex flex-col">
-                    <label>名前</label>
-                    <input type="text" value={userName || ''} className="py-1 px-4 border rounded" onChange={handleNameChange}/>
-                    <label>ID</label>
-                    <input type="text" value={userId || ''} className="py-1 px-4 border rounded" onChange={handleIdChange}/>
-                </div>
-                <LoginButton onClick={handleLogin}>ログイン</LoginButton>
-                <button className="mt-4 bg-gray-500 text-white px-3 py-1 rounded" onClick={closeModal}>
-                    閉じる
-                </button>
-            </article>
+        <div className="fixed z-10 top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-80">
+            <div className="flex flex-col items-center justify-center">
+                <article className="bg-white rounded-md m-auto p-10 ">
+                    <div className="rounded flex flex-col">
+                        <label>名前</label>
+                        <input type="text" value={userName || ''} className="py-1 px-4 border rounded" onChange={handleNameChange} />
+                        <label>ID</label>
+                        <input type="text" value={userId || ''} className="py-1 px-4 border rounded" onChange={handleIdChange} />
+                    </div>
+                    <LoginButton onClick={handleLogin}>ログイン</LoginButton>
+                    <button className="mt-4 bg-gray-500 text-white px-3 py-1 rounded" onClick={closeModal}>
+                        閉じる
+                    </button>
+                </article>
+            </div>
         </div>
     );
 };

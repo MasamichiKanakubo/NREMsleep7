@@ -1,16 +1,21 @@
-import Popup from "reactjs-popup";
-import Roulette from "@/components/roulette";
-export const Roulettemodal = () => {
+import React, { useState } from 'react';
+import RouletteButton from "@/components/roulettebutton";
+
+const Roulette: React.FC = () => {
+    const [result, setResult] = useState<number | null>(null);
+
+    const handleSpin = () => {
+        const randomNumber = Math.floor(Math.random() * 10) + 1;
+        setResult(randomNumber);
+        console.log("spin");
+    };
+
     return (
-        <Popup
-            modal
-            trigger={<button>open</button>}
-            closeOnDocumentClick
-        >
-            <div className={"w-full h-full flex flex-col justify-center items-center"}>
-                <Roulette />
-                <button >close</button>
-            </div>
-        </Popup>
+        <div>
+            <RouletteButton onClick={handleSpin}>ルーレットを回す</RouletteButton>
+            {result !== null && <p>Result: {result}</p>}
+        </div>
     );
 };
+
+export default Roulette;
