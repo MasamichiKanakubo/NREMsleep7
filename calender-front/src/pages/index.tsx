@@ -24,12 +24,12 @@ export default function App() {
   })
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [schedule, setSchedule] = useState([]);
+  const [schedules, setSchedules] = useState([]);
 
   const modalInputRef = useRef<HTMLInputElement>(null);
   const reasonRef = useRef<HTMLInputElement>(null);
 
-  const formModal = () => {
+  const toggleModal = () => {
     setModalOpen(true);
   }
 
@@ -38,7 +38,27 @@ export default function App() {
   }
 
   const handleSubmit = () => {
-    console.log("submit");
+    const dateInput = document.querySelector("input[name='曜日']");
+    const startTimeInput = document.querySelector("input[name='開始時刻']");
+    const endTimeInput = document.querySelector("input[name='終了時刻']");
+    const reason = modalInputRef.current?.value;
+
+    // if (dateInput && startTimeInput && endTimeInput && reason) {
+    //   const scheduleEntry = {
+    //     date: dateInput.value,
+    //     startTime: startTimeInput.value,
+    //     endTime: endTimeInput.value,
+    //     reason: reason
+    //   };
+
+    //   // スケジュールを登録する処理（例：setScheduleなど）
+    //   console.log("New schedule entry:", scheduleEntry);
+    //   const newSchedul = [...schedules];
+    //   setSchedules(prevSchedule => [...prevSchedule, newScheduleEntry]);
+
+      // 登録後にモーダルを閉じる
+    //   handleClose();
+    // }
     setModalOpen(false);
 
   }
