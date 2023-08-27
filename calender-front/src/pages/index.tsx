@@ -22,9 +22,7 @@ export default function App() {
   const [timeState, setTimeState] = useState<timeStateType>();
   const [isLoginShow, setIsLoginShow] = useState(true);
   const [isRouletteShow, setIsRouletteShow] = useState(false);
-  const closeModal = () => {
-    setIsLoginShow(false);
-  };
+ 
   const sample = [
     {
       dayOfWeek: "月",
@@ -86,116 +84,86 @@ export default function App() {
       });
   };
 
-  const getTimeData = () =>{
+  const getTimeData = () => {
     axios
-    .get(urlTime)
-    .then((response:{}) => {
-      setTimeState(response.data);
-      console.log(response.data);
-      }
-      )
+      .get(urlTime)
+      .then((response: {}) => {
+        setTimeState(response.data);
+        console.log(response.data);
+      })
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 
   useEffect(() => {
     document.title = `hello`;
   });
 
+  const closeRouletteModal = () => {
+    setIsRouletteShow(false);
+  };
 
-export default function App() {
-    const [isLoginShow,setIsLoginShow] = useState(true)
-    const [isRouletteShow, setIsRouletteShow] = useState(false)
-    const closeLoginModal = () => {
-        setIsLoginShow(false)
-    }
-    const closeRouletteModal = () => {
-        setIsRouletteShow(false)
-    }
-    const sample = [{
-        dayOfWeek: "月",
-        startTime: "09:00",
-        endTime: "12:00",
-        reason: "バイト"
-    },
-        {
-            dayOfWeek: "火",
-            startTime: "13:00",
-            endTime: "15:00",
-            reason: "法事"
-        },
-    ]
-    const count = 0;
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [schedules, setSchedules] = useState([]);
 
-    useEffect(() => {
-        document.title = `hello`;
-    })
+  const modalInputRef = useRef<HTMLInputElement>(null);
+  const reasonRef = useRef<HTMLInputElement>(null);
 
-    const [modalOpen, setModalOpen] = useState<boolean>(false);
-    const [schedules, setSchedules] = useState([]);
+  const toggleModal = () => {
+    setModalOpen(true);
+  };
 
-    const modalInputRef = useRef<HTMLInputElement>(null);
-    const reasonRef = useRef<HTMLInputElement>(null);
+  const handleClose = () => {
+    setModalOpen(false);
+  };
 
-    const toggleModal = () => {
-        setModalOpen(true);
-    }
+  const handleSubmit = () => {
+    const dateInput = document.querySelector("input[name='曜日']");
+    const startTimeInput = document.querySelector("input[name='開始時刻']");
+    const endTimeInput = document.querySelector("input[name='終了時刻']");
+    const reason = modalInputRef.current?.value;
+    setModalOpen(false);
+  };
 
-    const handleClose = () => {
-        setModalOpen(false);
-    }
+  const handleDemo = () => {
+    setModalOpen(true);
+  };
 
-    const handleSubmit = () => {
-        const dateInput = document.querySelector("input[name='曜日']");
-        const startTimeInput = document.querySelector("input[name='開始時刻']");
-        const endTimeInput = document.querySelector("input[name='終了時刻']");
-        const reason = modalInputRef.current?.value;
-
-        // if (dateInput && startTimeInput && endTimeInput && reason) {
-        //   const scheduleEntry = {
-        //     date: dateInput.value,
-        //     startTime: startTimeInput.value,
-        //     endTime: endTimeInput.value,
-        //     reason: reason
-        //   };
-
-        //   // スケジュールを登録する処理（例：setScheduleなど）
-        //   console.log("New schedule entry:", scheduleEntry);
-        //   const newSchedul = [...schedules];
-        //   setSchedules(prevSchedule => [...prevSchedule, newScheduleEntry]);
-
-        // 登録後にモーダルを閉じる
-        //   handleClose();
-        // }
-        setModalOpen(false);
-
-    }
-
-    const handleDemo = () => {
-        setModalOpen(true);
-    }
+  const handleCloseLogin = () => {
+    setIsLoginShow(false);
+  };
 
   return (
     <div className={style.App}>
       <WeeklyCalendar />
-      <button className="p-1 w-full absolute  top-20 left-[1000px] text-cyan-50 bg-cyan-500" onClick={handleDemo}>予定の追加</button>
+      <button
+        className="p-1 w-full absolute  top-20 left-[1000px] text-cyan-50 bg-cyan-500"
+        onClick={handleDemo}
+      >
+        予定の追加
+      </button>
       <Modal
         modalOpen={modalOpen}
         handleClose={handleClose}
         handleSubmit={handleSubmit}
         modalInputRef={modalInputRef}
       />
-      <div style={{ padding: '30px' }}>
-      </div>
-     <button className="p-1 w-full absolute  top-40 left-[1000px] text-cyan-50 bg-cyan-500" onClick={()=>setIsRouletteShow((prev)=>!prev)}>roulette</button>
-       {
-           isRouletteShow && <Roulettemodal />
-       }
-       <button className="p-1 w-full absolute  top-2 left-[1000px] text-cyan-50 bg-cyan-500" onClick={()=>setIsLoginShow((prev)=>!prev)}>login</button>
-       {
-           isLoginShow && <LoginModel closeModal={closeModal}/>
-       }
+      <div style={{ padding: "30px" }}></div>
+      <button
+        className="p-1 w-full absolute  top-40 left-[1000px] text-cyan-50 bg-cyan-500"
+        onClick={() => setIsRouletteShow((prev) => !prev)}
+      >
+        roulette
+      </button>
+      {isRouletteShow && <Roulettemodal />}
+      <button
+        className="p-1 w-full absolute  top-2 left-[1000px] text-cyan-50 bg-cyan-500"
+        onClick={() => setIsLoginShow((prev) => !prev)}
+      >
+        login
+      </button>
+      {isLoginShow && <LoginModel handleCloseLogin={handleCloseLogin} />}
     </div>
   );
 }

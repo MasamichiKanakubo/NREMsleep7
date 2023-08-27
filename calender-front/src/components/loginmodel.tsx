@@ -3,10 +3,10 @@ import React from "react";
 import LoginButton from "@/components/loginbutton";
 
 interface LoginModelProps {
-    closeModal: () => void;
+    handleCloseLogin: () => void;
 }
 
-const LoginModel: React.FC<LoginModelProps> = ({ closeModal }) => {
+const LoginModel: React.FC<LoginModelProps> = ({ handleCloseLogin }) => {
     const [userName, setUserName] = useState<null | string>(null)
     const [userId, setUserId] = useState<null | string>(null)
 
@@ -21,6 +21,7 @@ const LoginModel: React.FC<LoginModelProps> = ({ closeModal }) => {
     const handleLogin = () => {
         console.log('Name: ', userName);
         console.log('ID: ', userId);
+        handleCloseLogin();
     }
 
     return (
@@ -34,7 +35,7 @@ const LoginModel: React.FC<LoginModelProps> = ({ closeModal }) => {
                         <input type="text" value={userId || ''} className="py-1 px-4 border rounded" onChange={handleIdChange} />
                     </div>
                     <LoginButton onClick={handleLogin}>ログイン</LoginButton>
-                    <button className="mt-4 bg-gray-500 text-white px-3 py-1 rounded" onClick={closeModal}>
+                    <button className="mt-4 bg-gray-500 text-white px-3 py-1 rounded" onClick={()=>handleCloseLogin()}>
                         閉じる
                     </button>
                 </article>
