@@ -4,6 +4,8 @@ import { useRef, useState, useEffect } from "react";
 import Modal from "../components/modal";
 import LoginModel from "../components/loginmodel";
 import Roulettemodal from "../components/roulettemodal";
+import SettingModal from "../components/settingModal";
+import { isSet } from "util/types";
 
 export type timeStateType = {
   acountName: string;
@@ -22,6 +24,7 @@ export default function App() {
   const [timeState, setTimeState] = useState<timeStateType>();
   const [isLoginShow, setIsLoginShow] = useState(true);
   const [isRouletteShow, setIsRouletteShow] = useState(false);
+  const [isSettingShow, setIsSettingShow] = useState(false);
  
   const sample = [
     {
@@ -134,6 +137,10 @@ export default function App() {
     setIsLoginShow(false);
   };
 
+  const closeSettingModal = () => {
+    setIsSettingShow(false);
+  }
+
   return (
     <div className={style.App}>
       <WeeklyCalendar />
@@ -164,6 +171,13 @@ export default function App() {
         login
       </button>
       {isLoginShow && <LoginModel handleCloseLogin={handleCloseLogin} />}
+      <button
+      className="p-1 w-full absolute  top-50 left-[1000px] text-cyan-50 bg-cyan-500"
+      onClick={() => setIsSettingShow((prev) => !prev)}
+      >
+        setting
+        </button>
+        {isSettingShow && <SettingModal handleSettingClose={closeSettingModal} />}
     </div>
   );
 }
