@@ -100,11 +100,13 @@ const Admin: FC<AdminProps> = () => {
             <a>day:{time.day}</a>
             <br/>
             <a>timearray:</a>
+            <article className="flex">
             {time.timearray.split(',').map((time,index) => (
              <div key={index}>
-              <a>{time} </a>
-              <br/></div>
+             {time==="1"?"⭕️":"❌"}
+              </div>
               ))}
+            </article>
           </div>
         ))}
       </section>
