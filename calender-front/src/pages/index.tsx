@@ -3,7 +3,7 @@ import style from '../components/calendarStyle.module.css';
 import { useRef, useState, useEffect } from "react";
 import Modal from "../components/modal";
 import LoginModel from "../components/loginmodel";
-import {Roulettemodal} from "@/components/roulettemodal";
+import Roulettemodal from "@/components/roulettemodal";
 
 export default function App() {
   const [isLoginShow,setIsLoginShow] = useState(true)
