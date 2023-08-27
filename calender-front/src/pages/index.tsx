@@ -2,8 +2,15 @@ import { WeeklyCalendar } from "../components/weeklyCalendar";
 import style from '../components/calendarStyle.module.css';
 import { useRef, useState, useEffect } from "react";
 import Modal from "../components/modal";
+import LoginModel from "../components/loginmodel";
+import {Roulettemodal} from "@/components/roulettemodal";
 
 export default function App() {
+  const [isLoginShow,setIsLoginShow] = useState(true)
+  const [isRouletteShow, setIsRouletteShow] = useState(false)
+  const closeModal = () => {
+        setIsLoginShow(false)
+    }
   const sample = [{
     dayOfWeek: "月",
     startTime: "09:00",
@@ -79,6 +86,14 @@ return (
       />
       <div style={{ padding: '30px' }}>
       </div>
+     <button onClick={()=>setIsRouletteShow((prev)=>!prev)}>roulette</button>
+       {
+           isRouletteShow && <Roulettemodal />
+       }
+       <button onClick={()=>setIsLoginShow((prev)=>!prev)}>login</button>
+       {
+           isLoginShow && <LoginModel closeModal={closeModal}/>
+       }
     </div>
   );
 }
