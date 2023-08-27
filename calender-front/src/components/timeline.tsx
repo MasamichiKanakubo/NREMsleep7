@@ -7,9 +7,9 @@ import { DayDisplay } from "./dayDisplay";
 export const Timeline: FC<TimelineProps> = ({ dayList }) => {
   return (
     <div className={style.timeslotsContainer}>
-      <DayDisplay dayList={dayList}/>
+      <DayDisplay />
       <TimeDisplay />
-      <GridDisplay dayList={dayList} />
+      <GridDisplay />
     </div>
   );
 };
