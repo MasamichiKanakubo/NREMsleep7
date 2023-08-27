@@ -1,4 +1,4 @@
-import React, { FC, use, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 
 export type AdminProps = {
   title: string;
@@ -14,6 +14,23 @@ const Admin: FC<AdminProps> = () => {
   const [timeArray, setTimeArray] = useState([]);
 
   useEffect(() => {
+    // const generalData = {
+    //   deadline: "2000-10-09",
+    //   requiredtime: 10,
+    // }
+    // axios
+    // .post(urlGeneral, generalData)
+    // .then((response:{}) => {
+    //   console.log(response);
+    //   setDeadline(response.data.deadline);
+    // }
+    // )
+    // .catch((error) => {
+    //   console.log(error);
+    // }
+    // );
+
+
     axios
     .get(urlGeneral)
     .then((response:{}) => {
@@ -26,7 +43,26 @@ const Admin: FC<AdminProps> = () => {
       console.log(error);
     }
     );
+  const timeData = {
+    acountName: "test",
+    acountNumber: 2,
+    day: 0,
+    timearray: "1,0,0,0,0,0,0,1,1,0,0,0,0,1",
+    key: 2
+  }
 
+  axios
+    .post(urlTime, timeData)
+    .then((response:{}) => {
+      console.log('timeData');
+      console.log(response);
+      }
+      )
+    .catch((error) => {
+    console.log(error);
+    }
+    );
+  
   axios
     .get(urlTime)
     .then((response:{}) => {
@@ -64,11 +100,13 @@ const Admin: FC<AdminProps> = () => {
             <a>day:{time.day}</a>
             <br/>
             <a>timearray:</a>
+            <article className="flex">
             {time.timearray.split(',').map((time,index) => (
              <div key={index}>
-              <a>{time} </a>
-              <br/></div>
+             {time==="1"?"⭕️":"❌"}
+              </div>
               ))}
+            </article>
           </div>
         ))}
       </section>
