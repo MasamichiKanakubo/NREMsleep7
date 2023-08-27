@@ -21,13 +21,13 @@ const Modal: FC<ModalProps> = ({ modalOpen, handleClose, handleSubmit, modalInpu
         <div className="mt-4">
           <label htmlFor="date" className="block text-sm font-medium text-gray-700 text-left">曜日 </label>
           <select name="曜日" id="day-of-week-list" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-            <option value="day-of-week-list" className="text-center">日</option>
-            <option value="day-of-week-list" className="text-center">月</option>
-            <option value="day-of-week-list" className="text-center">火</option>
-            <option value="day-of-week-list" className="text-center">水</option>
-            <option value="day-of-week-list" className="text-center">木</option>
-            <option value="day-of-week-list" className="text-center">金</option>
-            <option value="day-of-week-list" className="text-center">土</option>
+            <option value="1" className="text-center">日</option>
+            <option value="2" className="text-center">月</option>
+            <option value="3" className="text-center">火</option>
+            <option value="4" className="text-center">水</option>
+            <option value="5" className="text-center">木</option>
+            <option value="6" className="text-center">金</option>
+            <option value="7" className="text-center">土</option>
           </select>
         </div>
         <div className="mt-4">

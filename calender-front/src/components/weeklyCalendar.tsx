@@ -2,8 +2,13 @@ import dayjs from "dayjs";
 import { FC } from "react";
 import { Timeline } from "./timeline";
 import style from './calendarStyle.module.css';
+import { timeStateType } from '../pages/index';
 
-export const WeeklyCalendar: FC = () => {
+type WeeklyCalendarProps = {
+  timeState: timeStateType
+};
+
+export const WeeklyCalendar: FC<WeeklyCalendarProps> = ({timeState}) => {
   const weekStartDayOffset = 0;
   const _date = dayjs();
   const _day = _date.day();
@@ -19,7 +24,7 @@ export const WeeklyCalendar: FC = () => {
 
   return (
     <div className={style.calendarContainer}>
-      <Timeline dayList={dayList} />
+      <Timeline dayList={dayList} timeState={timeState}/>
     </div>
   );
 };
