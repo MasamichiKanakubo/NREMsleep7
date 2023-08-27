@@ -67,7 +67,7 @@ export default function App() {
     setModalOpen(true);
   }
 
-  return (
+return (
     <div className={style.App}>
       <WeeklyCalendar />
       <button className="p-1 w-full absolute  top-2 left-[1000px]" onClick={handleDemo}>予定の追加</button>
