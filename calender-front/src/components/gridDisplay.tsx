@@ -21,6 +21,28 @@ export const GridDisplay: FC<TimelineProps> = ({ dayList }) => {
   //   );
   // };
 
+
+  const timeArray = [0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0];
+  const TimeBox  = () => {
+      return (<>{timeArray.map((time, index) => {
+      return (
+        <>
+        <p className="text-lg">xxxx</p>
+        <div className={`w-full h-[100px] block bg-red-500`} key={time}>a</div>        
+        </>
+        
+        // <>{((): any => {
+        //   if (time == 1) {
+        //     return (<div className=" bg-red-600 w-full h-[100px] block" key={time} style={{ gridColumn: index + 1 }}></div>);
+        //   } else {
+        //     return (<div className=" bg-blue-600 w-full h-[100px] block" key={time} style={{ gridColumn: index + 1 }}></div>);
+        //   }
+        // })()}</>
+      );
+    })}</>);
+  };
+
+
   return (
     <div className={style.calendarContainer}>
       <div className={style.calendarWrapper}>
@@ -39,6 +61,10 @@ export const GridDisplay: FC<TimelineProps> = ({ dayList }) => {
                 style={{ gridRow: index + 1 }}
                 className={style.calendarColumn}
               >
+                  
+                    <TimeBox />
+                    <h1 className="bg-slate-300">llll</h1>
+
                 {/* <EmptyCell date={dayItem.date} /> */}
               </div>
             );
@@ -48,3 +74,4 @@ export const GridDisplay: FC<TimelineProps> = ({ dayList }) => {
     </div>
   )
 }
+
