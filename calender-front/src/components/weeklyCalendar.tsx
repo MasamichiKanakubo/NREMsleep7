@@ -3,7 +3,7 @@ import { FC } from "react";
 import { Timeline } from "./timeline";
 import style from './calendarStyle.module.css';
 
-export const WeeklyCalendar: FC = () => {
+export const WeeklyCalendar: FC = (timeArray:{acountName:string}) => {
   const weekStartDayOffset = 0;
   const _date = dayjs();
   const _day = _date.day();

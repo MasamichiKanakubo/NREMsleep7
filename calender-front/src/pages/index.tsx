@@ -141,7 +141,7 @@ export default function App() {
 
   return (
     <div className={style.App}>
-      <WeeklyCalendar />
+      <WeeklyCalendar timeArray={timeArray}/>
       <button
         className="p-1 w-full absolute  top-2 left-[1000px]"
         onClick={handleDemo}
