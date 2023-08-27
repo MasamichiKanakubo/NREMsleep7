@@ -1,22 +1,21 @@
-import React, { useState } from "react";
-import Roulette from "@/components/roulette";
+import React, { useState } from 'react';
+import RouletteButton from "@/components/roulettebutton";
 
-interface RouletteModalProps {
-    closeModal: () => void;
-}
+const Roulette: React.FC = () => {
+    const [result, setResult] = useState<number | null>(null);
 
-export const RouletteModal: React.FC<RouletteModalProps> = ({ closeModal }) => {
+    const handleSpin = () => {
+        const randomNumber = Math.floor(Math.random() * 10) + 1;
+        setResult(randomNumber);
+        console.log("spin");
+    };
 
     return (
-        <div className="fixed z-10 top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-80">
-            <div className="bg-white rounded-md mt-60 m-auto pt-5 p-10">
-                <div className="w-full h-full flex flex-col justify-center items-center">
-                    <Roulette  />
-                </div>
-                <button className="mt-4 bg-gray-500 text-white px-3 py-1 rounded" onClick={closeModal}>
-                    閉じる
-                </button>
-            </div>
+        <div>
+            <RouletteButton onClick={handleSpin}>ルーレットを回す</RouletteButton>
+            {result !== null && <p>Result: {result}</p>}
         </div>
     );
 };
+
+export default Roulette;

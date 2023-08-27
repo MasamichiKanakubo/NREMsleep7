@@ -2,8 +2,9 @@ import { WeeklyCalendar } from "../components/weeklyCalendar";
 import style from '../components/calendarStyle.module.css';
 import { useRef, useState, useEffect } from "react";
 import Modal from "../components/modal";
-import LoginModel from "@/components/loginmodel";
-import {RouletteModal} from "@/components/roulettemodal";
+import LoginModel from "../components/loginmodel";
+import Roulettemodal from "@/components/roulettemodal";
+
 
 export default function App() {
     const [isLoginShow,setIsLoginShow] = useState(true)
@@ -77,26 +78,26 @@ export default function App() {
         setModalOpen(true);
     }
 
-    return (
-        <div className={style.App}>
-            <WeeklyCalendar />
-            <button className="p-1 w-full absolute  top-10 left-[1000px]" onClick={handleDemo}>予定の追加</button>
-            <Modal
-                modalOpen={modalOpen}
-                handleClose={handleClose}
-                handleSubmit={handleSubmit}
-                modalInputRef={modalInputRef}
-            />
-            <div style={{ padding: '30px' }}>
-            </div>
-            <button className="p-1 w-full absolute  top-20 left-[1000px]"　onClick={()=>setIsRouletteShow((prev)=>!prev)}>roulette</button>
-            {
-                isRouletteShow && <RouletteModal closeModal={closeRouletteModal}/>
-            }
-            <button className="p-1 w-full absolute  top-2 left-[1000px]"　onClick={()=>setIsLoginShow((prev)=>!prev)}>login</button>
-            {
-                isLoginShow && <LoginModel closeModal={closeLoginModal}/>
-            }
-        </div>
-    );
+return (
+    <div className={style.App}>
+      <WeeklyCalendar />
+      <button className="p-1 w-full absolute  top-20 left-[1000px] text-cyan-50 bg-cyan-500" onClick={handleDemo}>予定の追加</button>
+      <Modal
+        modalOpen={modalOpen}
+        handleClose={handleClose}
+        handleSubmit={handleSubmit}
+        modalInputRef={modalInputRef}
+      />
+      <div style={{ padding: '30px' }}>
+      </div>
+     <button className="p-1 w-full absolute  top-40 left-[1000px] text-cyan-50 bg-cyan-500" onClick={()=>setIsRouletteShow((prev)=>!prev)}>roulette</button>
+       {
+           isRouletteShow && <Roulettemodal />
+       }
+       <button className="p-1 w-full absolute  top-2 left-[1000px] text-cyan-50 bg-cyan-500" onClick={()=>setIsLoginShow((prev)=>!prev)}>login</button>
+       {
+           isLoginShow && <LoginModel closeModal={closeModal}/>
+       }
+    </div>
+  );
 }
