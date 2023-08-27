@@ -77,7 +77,7 @@ export default function App() {
 return (
     <div className={style.App}>
       <WeeklyCalendar />
-      <button className="p-1 w-full absolute  top-2 left-[1000px]" onClick={handleDemo}>予定の追加</button>
+      <button className="p-1 w-full absolute  top-10 left-[1000px]" onClick={handleDemo}>予定の追加</button>
       <Modal
         modalOpen={modalOpen}
         handleClose={handleClose}
@@ -86,11 +86,11 @@ return (
       />
       <div style={{ padding: '30px' }}>
       </div>
-     <button onClick={()=>setIsRouletteShow((prev)=>!prev)}>roulette</button>
+     <button className="p-1 w-full absolute  top-20 left-[1000px]" onClick={()=>setIsRouletteShow((prev)=>!prev)}>roulette</button>
        {
            isRouletteShow && <Roulettemodal />
        }
-       <button onClick={()=>setIsLoginShow((prev)=>!prev)}>login</button>
+       <button className="p-1 w-full absolute  top-2 left-[1000px]" onClick={()=>setIsLoginShow((prev)=>!prev)}>login</button>
        {
            isLoginShow && <LoginModel closeModal={closeModal}/>
        }
