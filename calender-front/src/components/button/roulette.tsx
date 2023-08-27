@@ -4,10 +4,11 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
     children: ReactNode;
 };
 
-const Button = ({ children, ...props }: Props) => {
+const RouletteButton = ({ children, onClick, ...props }: Props) => {
     return (
         <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-orange-400 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-full"
+            onClick = {onClick}
             {...props}
         >
             {children}
@@ -15,4 +16,4 @@ const Button = ({ children, ...props }: Props) => {
     );
 };
 
-export default Button;
+export default RouletteButton;
