@@ -3,7 +3,7 @@ import style from "../components/calendarStyle.module.css";
 import { useRef, useState, useEffect } from "react";
 import Modal from "../components/modal";
 import LoginModel from "../components/loginmodel";
-import Roulettemodal from "../components/roulettemodal";
+import Roulettemodal, {RouletteModal} from "../components/roulettemodal";
 
 export type timeStateType = {
   acountName: string;
@@ -156,7 +156,7 @@ export default function App() {
       >
         roulette
       </button>
-      {isRouletteShow && <Roulettemodal />}
+      {isRouletteShow && <RouletteModal closeModal={closeRouletteModal} />}
       <button
         className="p-1 w-full absolute  top-2 left-[1000px] text-cyan-50 bg-cyan-500"
         onClick={() => setIsLoginShow((prev) => !prev)}
