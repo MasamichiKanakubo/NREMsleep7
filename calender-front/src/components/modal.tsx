@@ -1,13 +1,21 @@
 import React from "react";
+import { FC } from "react";
 
-function Modal({ modalOpen, handleClose, handleSubmit, modalInputRef }) {
+export type ModalProps = {
+  modalOpen:boolean;
+  handleClose:() => void;
+  handleSubmit:() => void;
+  modalInputRef:React.RefObject<HTMLInputElement>;
+}
+
+const Modal:FC<ModalProps> = ({ modalOpen, handleClose, handleSubmit, modalInputRef }) =>{
 
   if (!modalOpen) {
-    return;
+    return null;
   }
 
   return (
-    <div className="block fixed z-10 pt-100 l-0 t-0 w-full h-full overflow-auto bg-black bg-opacity-40">
+    <div className="block fixed z-10 pt-100 l-0 t-0 w-full h-full overflow-auto bg-white bg-opacity-40">
       <div className="bg-white rounded-md mt-60 m-auto pt-5 p-10 b-1 h-10 w-3/5 ">
         <button className="text-gray-400 float-right text-3xl font-bold hover:text-black focus:text-black" onClick={handleClose}>&times;</button>
         <input className="w-80 border border-gray-500 mr-5" type="text" ref={modalInputRef} placeholder="小タスクの名前" />
@@ -15,6 +23,6 @@ function Modal({ modalOpen, handleClose, handleSubmit, modalInputRef }) {
       </div>
     </div>
   );
-}
+};
 
 export default Modal;
