@@ -25,13 +25,13 @@ export const GridDisplay: FC<TimelineProps> = ({ dayList }) => {
   return (
     <div className={style.calendarContainer}>
       <div className={style.calendarWrapper}>
-        <div>
+        {/* <div>
           {TIME_LIST.map((timeItem) => (
             <div key={timeItem.id}>
               <div className={style.horizontalHeight} />
             </div>
           ))}
-        </div>
+        </div> */}
         <div className={style.eventContainer}>
           {dayList.map((dayItem, index) => {
             return (

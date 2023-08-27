@@ -3,11 +3,12 @@ import style from './calendarStyle.module.css';
 import { GridDisplay } from "./gridDisplay";
 import { TimeDisplay } from "./timeDisplay";
 import { DayDisplay } from "./dayDisplay";
+import { TimelineProps } from "@/constans/dayListType";
 
-export const Timeline: FC<TimelineProps> = ({ dayList }) => {
+export const Timeline: FC<TimelineProps> = ({ dayList, timeState }) => {
   return (
     <div className={style.timeslotsContainer}>
-      <DayDisplay dayList={dayList}/>
+      <DayDisplay dayList={dayList} timeState={timeState}/>
       <TimeDisplay />
       <GridDisplay dayList={dayList} />
     </div>

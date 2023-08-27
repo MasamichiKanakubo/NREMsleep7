@@ -11,7 +11,7 @@ const Admin: FC<AdminProps> = () => {
   const urlTime = `${process.env.NEXT_PUBLIC_API_BASE}/time/`;
   const [deadline, setDeadline] = useState("");
   const [requiredtime, setRequiredtime] = useState("");
-  const [timeArray, setTimeArray] = useState([]);
+  const [timeState, setTimeState] = useState([]);
 
   useEffect(() => {
     // const generalData = {
@@ -66,7 +66,7 @@ const Admin: FC<AdminProps> = () => {
   axios
     .get(urlTime)
     .then((response:{}) => {
-      setTimeArray(response.data);
+      setTimeState(response.data);
       console.log(response.data);
       }
       )
@@ -91,7 +91,7 @@ const Admin: FC<AdminProps> = () => {
       </section>
       <section className="time">
         <h1 className="text-blue-400">time setting</h1>
-        {timeArray.map((time) => (
+        {timeState.map((time) => (
           <div key={time.key}>
             <a>acountName:{time.acountName}</a>
             <br/>

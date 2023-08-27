@@ -5,13 +5,21 @@ import Modal from "../components/modal";
 import LoginModel from "../components/loginmodel";
 import { Roulettemodal } from "@/components/roulettemodal";
 
+export type timeStateType = {
+  acountName: string;
+  acountNumber: number;
+  day: number;
+  timearray: string;
+  key: number;
+};
+
 export default function App() {
   const axios = require("axios");
   const urlGeneral = `${process.env.NEXT_PUBLIC_API_BASE}/general/`;
   const urlTime = `${process.env.NEXT_PUBLIC_API_BASE}/time/`;
   const [deadline, setDeadline] = useState("");
   const [requiredtime, setRequiredtime] = useState("");
-  const [timeArray, setTimeArray] = useState([]);
+  const [timeState, setTimeState] = useState<timeStateType>();
   const [isLoginShow, setIsLoginShow] = useState(true);
   const [isRouletteShow, setIsRouletteShow] = useState(false);
   const closeModal = () => {
@@ -31,7 +39,6 @@ export default function App() {
       reason: "法事",
     },
   ];
-  const count = 0;
 
   const postGeneralData = (data: {
     deadline: string;
@@ -83,7 +90,7 @@ export default function App() {
     axios
     .get(urlTime)
     .then((response:{}) => {
-      setTimeArray(response.data);
+      setTimeState(response.data);
       console.log(response.data);
       }
       )
@@ -141,7 +148,7 @@ export default function App() {
 
   return (
     <div className={style.App}>
-      <WeeklyCalendar timeArray={timeArray}/>
+      <WeeklyCalendar timeState={timeState}/>
       <button
         className="p-1 w-full absolute  top-2 left-[1000px]"
         onClick={handleDemo}
