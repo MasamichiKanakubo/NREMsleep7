@@ -32,9 +32,10 @@ const Roulette: React.FC = () => {
 
     return (
         <div>
+            {result !== null && <div>{result}<br />に決まりました</div>}
+            {result == null && <div className="roulette-number">{currentNumber}<br />...</div>}
             <RouletteButton onClick={startSpinning}>ルーレットを回す</RouletteButton>
-            <div className="roulette-number">{currentNumber}</div>
-            {result !== null && <p>Result: {result}</p>}
+
         </div>
     );
 };
