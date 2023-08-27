@@ -15,8 +15,8 @@ const Modal:FC<ModalProps> = ({ modalOpen, handleClose, handleSubmit, modalInput
   }
 
   return (
-    <div className="block fixed z-10 pt-100 l-0 t-0 w-full h-full overflow-auto bg-brack bg-opacity-40">
-      <div className="bg-white rounded-md mt-60 m-auto pt-5 p-10 b-1 h-10 w-3/5 ">
+    <div className="block absolute z-10 pt-100 w-full h-full overflow-auto bg-black bg-opacity-80">
+      <div className="bg-white rounded-md mt-60 m-auto pt-5 p-10 ">
         <button className="text-gray-400 float-right text-3xl font-bold hover:text-black focus:text-black" onClick={handleClose}>&times;</button>
         <label htmlFor="date">曜日 </label>
         <input type="date" name="曜日" list="day-of-week-list"/>
@@ -30,9 +30,9 @@ const Modal:FC<ModalProps> = ({ modalOpen, handleClose, handleSubmit, modalInput
           <option value="土"></option>
         </datalist>
         <label htmlFor="time"> 開始時刻 </label>
-        <input type="time" name="開始時刻" className="rounded-sm p-1" min="9:00" max="22:00" step="3600" list="data-list" />
+        <input type="time" name="開始時刻" className="rounded-sm p-2" min="9:00" max="22:00" step="3600" list="data-list" />
         <label htmlFor="time"> 終了時刻 </label>
-        <input type="time" name="終了時刻" className="rounded-sm p-5" min="9:00" max="22:00" step="3600" list="data-list" />
+        <input type="time" name="終了時刻" className="rounded-sm p-2" min="9:00" max="22:00" step="3600" list="data-list" />
         <datalist id="data-list">
           <option value="09:00"></option>
           <option value="10:00"></option>

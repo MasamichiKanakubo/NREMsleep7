@@ -6,7 +6,11 @@ export const GridDisplay: FC<TimelineProps> = ({ dayList }) => {
   const ex1Array = [0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0];
   const ex2Array = [1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0];
 
-  
+  const ChangeTimeString: FC<{ timeString: string }> = ({ timeString }) => {
+    const timeArray = timeString.split(',');
+    return timeArray;
+  }
+
   const TimeBox: FC<{ times: number[] }> = ({ times }) => {
     return (<>{times.map((time: number) => {
       return (

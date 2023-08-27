@@ -70,7 +70,7 @@ export default function App() {
   return (
     <div className={style.App}>
       <WeeklyCalendar />
-      <button className=" p-1" onClick={handleDemo}>予定の追加</button>
+      <button className="p-1 " onClick={handleDemo}>予定の追加</button>
       <Modal
         modalOpen={modalOpen}
         handleClose={handleClose}

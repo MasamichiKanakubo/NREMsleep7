@@ -63,10 +63,12 @@
 
 .eventContainer {
   display: grid;
+  position: absolute;
   grid-template-rows: repeat(7, 1fr);
   height: 100%;
   width: 70%;
   min-width: 880px;
+  top: 20px;
   border: 1px solid #e6e6e6;
 }
 
