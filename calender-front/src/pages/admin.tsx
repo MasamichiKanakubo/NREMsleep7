@@ -4,6 +4,7 @@ export type AdminProps = {
   title: string;
 };
 
+
 const Admin: FC<AdminProps> = () => {
   const axios = require("axios");
   const urlGeneral = `${process.env.NEXT_PUBLIC_API_BASE}/general/`;
@@ -12,13 +13,13 @@ const Admin: FC<AdminProps> = () => {
   const [requiredtime, setRequiredtime] = useState("");
   const [timeArray, setTimeArray] = useState([]);
 
-  axios
+  useEffect(() => {
+    axios
     .get(urlGeneral)
-    .then((response) => {
+    .then((response:{}) => {
       setDeadline(response.data[0].deadline);
       setRequiredtime(response.data[0].requiredtime);
       console.log(response);
-      console.log(response.data);
     }
     )
     .catch((error) => {
@@ -26,19 +27,50 @@ const Admin: FC<AdminProps> = () => {
     }
     );
 
+  axios
+    .get(urlTime)
+    .then((response:{}) => {
+      setTimeArray(response.data);
+      console.log(response.data);
+      }
+      )
+      .catch((error) => {
+        console.log(error);
+      }
+      );
+  }, []);
+
+
+
   return (
     <>
       <section className="acounts">
         <h1 className="text-blue-400">check acounts</h1>
       </section>
       <section className="generalSetting">
-        <h1>general setting</h1>
+        <h1 className="text-blue-400">general setting</h1>
         <a>deadline:{deadline}</a>
         <br/>
         <a>requiredtime:{requiredtime}</a>
       </section>
       <section className="time">
-        <h1>time setting</h1>
+        <h1 className="text-blue-400">time setting</h1>
+        {timeArray.map((time) => (
+          <div key={time.key}>
+            <a>acountName:{time.acountName}</a>
+            <br/>
+            <a>acountNumber:{time.acountNumber}</a>
+            <br/>
+            <a>day:{time.day}</a>
+            <br/>
+            <a>timearray:</a>
+            {time.timearray.split(',').map((time,index) => (
+             <div key={index}>
+              <a>{time} </a>
+              <br/></div>
+              ))}
+          </div>
+        ))}
       </section>
     </>
   );
