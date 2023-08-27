@@ -3,13 +3,16 @@ import style from '../components/calendarStyle.module.css';
 import { useRef, useState, useEffect } from "react";
 import Modal from "../components/modal";
 import LoginModel from "@/components/loginmodel";
-import {Roulettemodal} from "@/components/roulettemodal";
+import {RouletteModal} from "@/components/roulettemodal";
 
 export default function App() {
     const [isLoginShow,setIsLoginShow] = useState(true)
     const [isRouletteShow, setIsRouletteShow] = useState(false)
-    const closeModal = () => {
+    const closeLoginModal = () => {
         setIsLoginShow(false)
+    }
+    const closeRouletteModal = () => {
+        setIsRouletteShow(false)
     }
     const sample = [{
         dayOfWeek: "月",
@@ -88,11 +91,11 @@ export default function App() {
             </div>
             <button onClick={()=>setIsRouletteShow((prev)=>!prev)}>roulette</button>
             {
-                isRouletteShow && <Roulettemodal />
+                isRouletteShow && <RouletteModal closeModal={closeRouletteModal}/>
             }
             <button onClick={()=>setIsLoginShow((prev)=>!prev)}>login</button>
             {
-                isLoginShow && <LoginModel closeModal={closeModal}/>
+                isLoginShow && <LoginModel closeModal={closeLoginModal}/>
             }
         </div>
     );

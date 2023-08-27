@@ -4,7 +4,7 @@ import RouletteButton from "@/components/roulettebutton";
 const Roulette: React.FC = () => {
     const [result, setResult] = useState<number | null>(null);
 
-    const handleSpin = () => {// ルーレットのロジック。ここでは適当な数字を生成して表示します。
+    const handleSpin = () => {
         const randomNumber = Math.floor(Math.random() * 10) + 1;
         setResult(randomNumber);
         console.log("spin");
