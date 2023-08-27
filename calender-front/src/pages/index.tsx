@@ -1,19 +1,84 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import {useState} from "react";
-import Roulette from "../components/roulette";
+import { WeeklyCalendar } from "../components/weeklyCalendar";
+import style from '../components/calendarStyle.module.css';
+import { useRef, useState, useEffect } from "react";
+import Modal from "../components/modal";
 
-const inter = Inter({ subsets: ['latin'] })
+export default function App() {
+  const sample = [{
+    dayOfWeek: "月",
+    startTime: "09:00",
+    endTime: "12:00",
+    reason: "バイト"
+  },
+  {
+    dayOfWeek: "火",
+    startTime: "13:00",
+    endTime: "15:00",
+    reason: "法事"
+  },
+]
+  const count = 0;
 
-export default function Home() {
-    const [isShow, setIsShow] = useState(true)
-  return (
-   <>
-   <h1>here is honban</h1>
-       <button onClick={()=>setIsShow((prev)=>!prev)}>toggle</button>
-       {
-           isShow && <Roulette />
-       }
-   </>
-  )
+  useEffect(() => {
+    document.title = `hello`;
+  })
+
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [schedules, setSchedules] = useState([]);
+
+  const modalInputRef = useRef<HTMLInputElement>(null);
+  const reasonRef = useRef<HTMLInputElement>(null);
+
+  const toggleModal = () => {
+    setModalOpen(true);
+  }
+
+  const handleClose = () => {
+    setModalOpen(false);
+  }
+
+  const handleSubmit = () => {
+    const dateInput = document.querySelector("input[name='曜日']");
+    const startTimeInput = document.querySelector("input[name='開始時刻']");
+    const endTimeInput = document.querySelector("input[name='終了時刻']");
+    const reason = modalInputRef.current?.value;
+
+    // if (dateInput && startTimeInput && endTimeInput && reason) {
+    //   const scheduleEntry = {
+    //     date: dateInput.value,
+    //     startTime: startTimeInput.value,
+    //     endTime: endTimeInput.value,
+    //     reason: reason
+    //   };
+
+    //   // スケジュールを登録する処理（例：setScheduleなど）
+    //   console.log("New schedule entry:", scheduleEntry);
+    //   const newSchedul = [...schedules];
+    //   setSchedules(prevSchedule => [...prevSchedule, newScheduleEntry]);
+
+      // 登録後にモーダルを閉じる
+    //   handleClose();
+    // }
+    setModalOpen(false);
+
+  }
+
+  const handleDemo = () => {
+    setModalOpen(true);
+  }
+
+return (
+    <div className={style.App}>
+      <WeeklyCalendar />
+      <button className="p-1 w-full absolute  top-2 left-[1000px]" onClick={handleDemo}>予定の追加</button>
+      <Modal
+        modalOpen={modalOpen}
+        handleClose={handleClose}
+        handleSubmit={handleSubmit}
+        modalInputRef={modalInputRef}
+      />
+      <div style={{ padding: '30px' }}>
+      </div>
+    </div>
+  );
 }
