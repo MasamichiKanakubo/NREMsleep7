@@ -4,13 +4,6 @@ export type AdminProps = {
   title: string;
 };
 
-type Time = {
-  acountName: string;
-  acountNumber: number;
-  day: number;
-  timearray: number[];
-  key: number;
-}
 
 const Admin: FC<AdminProps> = () => {
   const axios = require("axios");
@@ -20,13 +13,13 @@ const Admin: FC<AdminProps> = () => {
   const [requiredtime, setRequiredtime] = useState("");
   const [timeArray, setTimeArray] = useState([]);
 
-  axios
+  useEffect(() => {
+    axios
     .get(urlGeneral)
-    .then((response) => {
+    .then((response:{}) => {
       setDeadline(response.data[0].deadline);
       setRequiredtime(response.data[0].requiredtime);
       console.log(response);
-      console.log(response.data);
     }
     )
     .catch((error) => {
@@ -36,16 +29,18 @@ const Admin: FC<AdminProps> = () => {
 
   axios
     .get(urlTime)
-    .then((response) => {
+    .then((response:{}) => {
       setTimeArray(response.data);
-      console.log(response);
       console.log(response.data);
-    }
-    )
-    .catch((error) => {
-      console.log(error);
-    }
-    );
+      }
+      )
+      .catch((error) => {
+        console.log(error);
+      }
+      );
+  }, []);
+
+
 
   return (
     <>
@@ -60,7 +55,7 @@ const Admin: FC<AdminProps> = () => {
       </section>
       <section className="time">
         <h1 className="text-blue-400">time setting</h1>
-        {timeArray.map((time:Time) => (
+        {timeArray.map((time) => (
           <div key={time.key}>
             <a>acountName:{time.acountName}</a>
             <br/>
@@ -68,7 +63,12 @@ const Admin: FC<AdminProps> = () => {
             <br/>
             <a>day:{time.day}</a>
             <br/>
-            <a>timearray:{time.timearray}</a>
+            <a>timearray:</a>
+            {time.timearray.split(',').map((time,index) => (
+             <div key={index}>
+              <a>{time} </a>
+              <br/></div>
+              ))}
           </div>
         ))}
       </section>
