@@ -1,4 +1,4 @@
-import React, { FC, use, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 
 export type AdminProps = {
   title: string;
@@ -14,12 +14,15 @@ const Admin: FC<AdminProps> = () => {
   const [timeArray, setTimeArray] = useState([]);
 
   useEffect(() => {
+    const generalData = {
+      deadline: "2000-10-09",
+      requiredtime: 10,
+    }
     axios
-    .get(urlGeneral)
+    .post(urlGeneral, generalData)
     .then((response:{}) => {
-      setDeadline(response.data[0].deadline);
-      setRequiredtime(response.data[0].requiredtime);
       console.log(response);
+      setDeadline(response.data.deadline);
     }
     )
     .catch((error) => {
@@ -27,6 +30,39 @@ const Admin: FC<AdminProps> = () => {
     }
     );
 
+
+    // axios
+    // .get(urlGeneral)
+    // .then((response:{}) => {
+    //   setDeadline(response.data[0].deadline);
+    //   setRequiredtime(response.data[0].requiredtime);
+    //   console.log(response);
+    // }
+    // )
+    // .catch((error) => {
+    //   console.log(error);
+    // }
+    // );
+  const timeData = {
+    acountName: "test",
+    acountNumber: 2,
+    day: 0,
+    timearray: "1,0,0,0,0,0,0,1,1,0,0,0,0,1",
+    key: 2
+  }
+
+  axios
+    .post(urlTime, timeData)
+    .then((response:{}) => {
+      console.log('timeData');
+      console.log(response);
+      }
+      )
+    .catch((error) => {
+    console.log(error);
+    }
+    );
+  
   axios
     .get(urlTime)
     .then((response:{}) => {
