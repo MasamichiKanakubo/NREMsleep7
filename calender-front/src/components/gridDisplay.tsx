@@ -1,6 +1,14 @@
 import { FC } from "react";
 import style from "../components/calendarStyle.module.css";
-import { HOUR_LIST, TIME_LIST } from "@/constans/timeList";
+import { DAYOFWEEK_LIST, HOUR_LIST, TIME_LIST } from "@/constans/timeList";
+
+export const HUMAN_LIST = [
+  { id: 1, item: "A" },
+  { id: 2, item: "B" },
+  { id: 3, item: "C" },
+  { id: 4, item: "D" },
+]
+
 
 export const GridDisplay: FC<TimelineProps> = ({ dayList }) => {
   const ex1Array = [0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0];
@@ -15,7 +23,7 @@ export const GridDisplay: FC<TimelineProps> = ({ dayList }) => {
     return (<>{times.map((time: number) => {
       return (
         <>
-          <div className={`w-full h-[25px] block ${time === 1 ? "bg-pink-300" : "bg-white"}`} key={time}> </div>
+          <div className={`w-full block ${time === 1 ? "bg-pink-300" : "bg-white"}`} key={time}> </div>
         </>
       );
     })}</>);
@@ -24,27 +32,29 @@ export const GridDisplay: FC<TimelineProps> = ({ dayList }) => {
 
   return (
     <div className={style.calendarContainer}>
-      <div className={style.calendarWrapper}>
-        <div>
-          {TIME_LIST.map((timeItem) => (
-            <div key={timeItem.id}>
-              <div className={style.horizontalHeight} />
+      <div className={style.eventContainer}>
+        {DAYOFWEEK_LIST.map((dayItem, index) => {
+          return (
+            <div
+              key={dayItem.id}
+              style={{ gridRow: index + 1 }}
+              className={style.calendarColumn}
+            >
+              {
+                //4人.mapの中にtimebox
+                HUMAN_LIST.map((humanItem, index) => {
+                  return (
+                    <div key={humanItem.id} className="flex h-full">
+                      <TimeBox times={ex1Array} />
+                    </div>
+                  )
+                })
+
+              }
+              {/* <TimeBox times={ex1Array} /> */}
             </div>
-          ))}
-        </div>
-        <div className={style.eventContainer}>
-          {dayList.map((dayItem, index) => {
-            return (
-              <div
-                key={dayItem.date}
-                style={{ gridRow: index + 1 }}
-                className={style.calendarColumn}
-              >
-                <TimeBox times={ex1Array} />
-              </div>
-            );
-          })}
-        </div>
+          );
+        })}
       </div>
     </div>
   )
