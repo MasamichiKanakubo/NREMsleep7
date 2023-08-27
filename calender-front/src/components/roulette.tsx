@@ -12,7 +12,7 @@ const Roulette: React.FC = () => {
 
     return (
         <div>
-            <RouletteButton onClick={handleSpin}>Spin the Roulette</RouletteButton>
+            <RouletteButton onClick={handleSpin}>ルーレットを回す</RouletteButton>
             {result !== null && <p>Result: {result}</p>}
         </div>
     );
