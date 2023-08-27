@@ -15,7 +15,7 @@ export const GridDisplay: FC<TimelineProps> = ({ dayList }) => {
     return (<>{times.map((time: number) => {
       return (
         <>
-          <div className={`w-full h-[25px] block ${time === 1 ? "bg-pink-300" : "bg-white"}`} key={time}>a</div>
+          <div className={`w-full h-[25px] block ${time === 1 ? "bg-pink-300" : "bg-white"}`} key={time}> </div>
         </>
       );
     })}</>);

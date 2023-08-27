@@ -20,7 +20,7 @@ export default function App() {
   const count = 0;
 
   useEffect(() => {
-    document.title = `you clicked ${count} times`;
+    document.title = `hello`;
   })
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -70,7 +70,7 @@ export default function App() {
   return (
     <div className={style.App}>
       <WeeklyCalendar />
-      <button className="p-1 " onClick={handleDemo}>予定の追加</button>
+      <button className="p-1 w-full absolute  top-2 left-[1000px]" onClick={handleDemo}>予定の追加</button>
       <Modal
         modalOpen={modalOpen}
         handleClose={handleClose}
