@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import Modal from "../components/modal";
 import LoginModel from "../components/loginmodel";
 import Roulettemodal from "../components/roulettemodal";
+import uuid from "react-uuid";
 
 export type timeStateType = {
   acountName: string;
@@ -22,6 +23,8 @@ export default function App() {
   const [timeState, setTimeState] = useState<timeStateType>();
   const [isLoginShow, setIsLoginShow] = useState(true);
   const [isRouletteShow, setIsRouletteShow] = useState(false);
+  const [acountName, setAcountName] = useState<string>("defaultuser");
+  const [acountNumber, setAcountNumber] = useState<number>(0);
  
   const sample = [
     {
@@ -59,24 +62,6 @@ export default function App() {
       .then((response: {}) => {
         setDeadline(response.data[0].deadline);
         setRequiredtime(response.data[0].requiredtime);
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const postTimeData = (data: {
-    acountName: string;
-    acountNumber: number;
-    day: number;
-    timearray: string;
-    key: number;
-  }) => {
-    axios
-      .post(urlTime, timeData)
-      .then((response: {}) => {
-        console.log("timeData");
         console.log(response);
       })
       .catch((error) => {
@@ -148,6 +133,8 @@ export default function App() {
         handleClose={handleClose}
         handleSubmit={handleSubmit}
         modalInputRef={modalInputRef}
+        acountName={acountName}
+        acountNumber={acountNumber}
       />
       <div style={{ padding: "30px" }}></div>
       <button
@@ -163,7 +150,7 @@ export default function App() {
       >
         login
       </button>
-      {isLoginShow && <LoginModel handleCloseLogin={handleCloseLogin} />}
+      {isLoginShow && <LoginModel setAcountName={setAcountName} setAcountNumber={setAcountNumber} handleCloseLogin={handleCloseLogin} />}
     </div>
   );
 }
