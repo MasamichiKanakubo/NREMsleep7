@@ -3,7 +3,7 @@ import style from "../components/calendarStyle.module.css";
 import { useRef, useState, useEffect } from "react";
 import Modal from "../components/modal";
 import LoginModel from "../components/loginmodel";
-import Roulettemodal, {RouletteModal} from "../components/roulettemodal";
+import RouletteModal from "../components/roulettemodal";
 
 export type timeStateType = {
   acountName: string;

@@ -20,4 +20,4 @@ export const RouletteModal: React.FC<RouletteModalProps> = ({ closeModal }) => {
         </div>
     );
 };
-export default Roulette;
+export default RouletteModal;
