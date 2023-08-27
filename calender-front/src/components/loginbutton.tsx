@@ -7,7 +7,7 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 const LoginButton = ({ children, onClick, ...props }: Props) => {
     return (
         <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2.5 rounded"
+            className="mt-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2.5 rounded"
             onClick={onClick}
             {...props}
         >
