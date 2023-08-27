@@ -24,19 +24,19 @@ const LoginModel: React.FC<LoginModelProps> = ({ closeModal }) => {
     }
 
     return (
-        <div　className="flex flex-col items-center justify-center">
-            <article className="bg-white">
-                <div className="rounded flex flex-col">
+        <div className="fixed z-10 top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-80">
+            <div className="bg-white rounded-md mt-60 m-auto pt-5 p-10">
+                <div className="w-full h-full flex flex-col justify-center items-center">
                     <label>名前</label>
                     <input type="text" value={userName || ''} className="py-1 px-4 border rounded" onChange={handleNameChange}/>
                     <label>ID</label>
                     <input type="text" value={userId || ''} className="py-1 px-4 border rounded" onChange={handleIdChange}/>
-                </div>
                 <LoginButton onClick={handleLogin}>ログイン</LoginButton>
+                </div>
                 <button className="mt-4 bg-gray-500 text-white px-3 py-1 rounded" onClick={closeModal}>
                     閉じる
                 </button>
-            </article>
+            </div>
         </div>
     );
 };
