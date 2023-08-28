@@ -3,7 +3,7 @@ import style from "../components/calendarStyle.module.css";
 import { useRef, useState, useEffect } from "react";
 import Modal from "../components/modal";
 import LoginModel from "../components/loginmodel";
-import Roulettemodal, {RouletteModal} from "../components/roulettemodal";
+import Roulettemodal, { RouletteModal } from "../components/roulettemodal";
 import SettingModal from "../components/settingModal";
 import { isSet } from "util/types";
 
@@ -25,7 +25,7 @@ export default function App() {
   const [isLoginShow, setIsLoginShow] = useState(true);
   const [isRouletteShow, setIsRouletteShow] = useState(false);
   const [isSettingShow, setIsSettingShow] = useState(false);
- 
+
   const sample = [
     {
       dayOfWeek: "月",
@@ -145,10 +145,10 @@ export default function App() {
     <div className={style.App}>
       <WeeklyCalendar />
       <button
-        className="p-1 w-full absolute  top-20 left-[1000px] text-cyan-50 bg-cyan-500"
+        className="p-1 min-w-full w-[100px] absolute top-20 left-[1000px] text-cyan-50 bg-cyan-500"
         onClick={handleDemo}
       >
-        予定の追加
+        add Schedule
       </button>
       <Modal
         modalOpen={modalOpen}
@@ -158,26 +158,26 @@ export default function App() {
       />
       <div style={{ padding: "30px" }}></div>
       <button
-        className="p-1 w-full absolute  top-40 left-[1000px] text-cyan-50 bg-cyan-500"
+        className="p-1 min-w-full w-[100px] absolute top-40 left-[1000px] text-cyan-50 bg-cyan-500"
         onClick={() => setIsRouletteShow((prev) => !prev)}
       >
         roulette
       </button>
       {isRouletteShow && <RouletteModal closeModal={closeRouletteModal} />}
       <button
-        className="p-1 w-full absolute  top-2 left-[1000px] text-cyan-50 bg-cyan-500"
+        className="p-1 min-w-full w-[100px] absolute top-2 left-[1000px] text-cyan-50 bg-cyan-500"
         onClick={() => setIsLoginShow((prev) => !prev)}
       >
         login
       </button>
       {isLoginShow && <LoginModel handleCloseLogin={handleCloseLogin} />}
       <button
-      className="p-1 w-full absolute  top-50 left-[1000px] text-cyan-50 bg-cyan-500"
-      onClick={() => setIsSettingShow((prev) => !prev)}
+        className="p-1 min-w-full w-[100px] absolute top-45 left-[1000px] text-cyan-50 bg-cyan-500"
+        onClick={() => setIsSettingShow((prev) => !prev)}
       >
         setting
-        </button>
-        {isSettingShow && <SettingModal handleSettingClose={closeSettingModal} />}
+      </button>
+      {isSettingShow && <SettingModal handleSettingClose={closeSettingModal} />}
     </div>
   );
 }
