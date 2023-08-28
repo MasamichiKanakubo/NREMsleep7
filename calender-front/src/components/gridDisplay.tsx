@@ -1,6 +1,9 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import style from "../components/calendarStyle.module.css";
 import { DAYOFWEEK_LIST, HOUR_LIST, TIME_LIST } from "@/constans/timeList";
+import axios from "axios";
+import { timeStateType } from "@/pages";
+import { data } from "autoprefixer";
 
 export const HUMAN_LIST = [
   { id: 1, item: "A" },
@@ -9,10 +12,46 @@ export const HUMAN_LIST = [
   { id: 4, item: "D" },
 ]
 
-
 export const GridDisplay = () => {
   const ex1Array = [0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0];
-  const ex2Array = [1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0];
+  const ex2Array = [0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0];
+  const ex3Array = [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1];
+  const ex4Array = [1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0];
+
+  const ex5Array = [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0];
+  const ex6Array = [0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0];
+  const ex7Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1];
+  const ex8Array = [1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0];
+  
+  const ex9Array = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0];
+  const ex10Array = [1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0];
+  const ex11Array = [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  const ex12Array = [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0];
+
+
+  const example1 = [
+    ex1Array, ex2Array, ex3Array, ex4Array
+  ];
+  const example2=[ex5Array, ex5Array, ex6Array, ex7Array];
+  const example3=[ex8Array, ex9Array, ex10Array, ex11Array];
+
+  const example = [example1, example2, example3];
+
+  const axios = require("axios");
+  const urlTime = `${process.env.NEXT_PUBLIC_API_BASE}/time/`;
+  const [timeState, setTimeState] = useState<timeStateType>();
+  const getTimeData = () => {
+    axios
+      .get(urlTime)
+      .then((response: {}) => {
+        setTimeState(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 
   const ChangeTimeString: FC<{ timeString: string }> = ({ timeString }) => {
     const timeArray = timeString.split(',');
@@ -40,12 +79,13 @@ export const GridDisplay = () => {
               style={{ gridRow: index + 1 }}
               className={style.calendarColumn}
             >
-              {
+              { 
                 //4人.mapの中にtimebox
                 HUMAN_LIST.map((humanItem, index) => {
                   return (
-                    <div key={humanItem.id} className="flex h-full">
-                      <TimeBox times={ex1Array} />
+                    <div key={humanItem.id} className="flex h-full">{
+                    }
+                      <TimeBox times={example1[index]} />
                     </div>
                   )
                 })

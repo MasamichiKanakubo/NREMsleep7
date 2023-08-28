@@ -26,21 +26,7 @@ export default function App() {
   const [isSettingShow, setIsSettingShow] = useState(false);
   const [acountName, setAcountName] = useState<string>("defaultuser");
   const [acountNumber, setAcountNumber] = useState<number>(0);
- 
-  const sample = [
-    {
-      dayOfWeek: "月",
-      startTime: "09:00",
-      endTime: "12:00",
-      reason: "バイト",
-    },
-    {
-      dayOfWeek: "火",
-      startTime: "13:00",
-      endTime: "15:00",
-      reason: "法事",
-    },
-  ];
+
 
   const postGeneralData = (data: {
     deadline: string;
@@ -81,6 +67,7 @@ export default function App() {
         console.log(error);
       });
   };
+  console.log("getTimeData", getTimeData())
 
   useEffect(() => {
     document.title = `hello`;
@@ -126,7 +113,7 @@ export default function App() {
 
   return (
     <div className={style.App}>
-      <WeeklyCalendar timeState={} />
+      <WeeklyCalendar />
       <button
         className="p-1 w-full absolute  top-20 left-[1000px] text-cyan-50 bg-cyan-500"
         onClick={handleDemo}
