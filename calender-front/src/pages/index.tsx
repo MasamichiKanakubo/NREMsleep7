@@ -3,9 +3,8 @@ import style from "../components/calendarStyle.module.css";
 import { useRef, useState, useEffect } from "react";
 import Modal from "../components/modal";
 import LoginModel from "../components/loginmodel";
-import Roulettemodal, {RouletteModal} from "../components/roulettemodal";
+import {RouletteModal} from "../components/roulettemodal";
 import SettingModal from "../components/settingModal";
-import { isSet } from "util/types";
 
 export type timeStateType = {
   acountName: string;
@@ -25,6 +24,8 @@ export default function App() {
   const [isLoginShow, setIsLoginShow] = useState(true);
   const [isRouletteShow, setIsRouletteShow] = useState(false);
   const [isSettingShow, setIsSettingShow] = useState(false);
+  const [acountName, setAcountName] = useState<string>("defaultuser");
+  const [acountNumber, setAcountNumber] = useState<number>(0);
  
   const sample = [
     {
@@ -62,24 +63,6 @@ export default function App() {
       .then((response: {}) => {
         setDeadline(response.data[0].deadline);
         setRequiredtime(response.data[0].requiredtime);
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const postTimeData = (data: {
-    acountName: string;
-    acountNumber: number;
-    day: number;
-    timearray: string;
-    key: number;
-  }) => {
-    axios
-      .post(urlTime, timeData)
-      .then((response: {}) => {
-        console.log("timeData");
         console.log(response);
       })
       .catch((error) => {
@@ -143,7 +126,7 @@ export default function App() {
 
   return (
     <div className={style.App}>
-      <WeeklyCalendar />
+      <WeeklyCalendar timeState={} />
       <button
         className="p-1 w-full absolute  top-20 left-[1000px] text-cyan-50 bg-cyan-500"
         onClick={handleDemo}
@@ -155,6 +138,8 @@ export default function App() {
         handleClose={handleClose}
         handleSubmit={handleSubmit}
         modalInputRef={modalInputRef}
+        acountName={acountName}
+        acountNumber={acountNumber}
       />
       <div style={{ padding: "30px" }}></div>
       <button
@@ -170,14 +155,14 @@ export default function App() {
       >
         login
       </button>
-      {isLoginShow && <LoginModel handleCloseLogin={handleCloseLogin} />}
+      {isLoginShow && <LoginModel setAcountName={setAcountName} setAcountNumber={setAcountNumber} handleCloseLogin={handleCloseLogin} />}
       <button
       className="p-1 w-full absolute  top-50 left-[1000px] text-cyan-50 bg-cyan-500"
       onClick={() => setIsSettingShow((prev) => !prev)}
       >
         setting
-        </button>
-        {isSettingShow && <SettingModal handleSettingClose={closeSettingModal} />}
+      </button>
+      {isSettingShow && <SettingModal handleSettingClose={closeSettingModal} />}
     </div>
   );
 }

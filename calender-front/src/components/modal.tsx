@@ -1,14 +1,109 @@
-import React from "react";
+import React, { useRef } from "react";
 import { FC } from "react";
+const { v4: uuidv4 } = require('uuid');
 
 export type ModalProps = {
   modalOpen: boolean;
   handleClose: () => void;
-  handleSubmit: () => void;
-  modalInputRef: React.RefObject<HTMLInputElement>;
-}
+  acountName: string;
+  acountNumber: number;
+};
 
-const Modal: FC<ModalProps> = ({ modalOpen, handleClose, handleSubmit, modalInputRef }) => {
+const Modal: FC<ModalProps> = ({
+  modalOpen,
+  handleClose,
+  acountName,
+  acountNumber,
+}) => {
+  const dayOfWeekRef = React.useRef<HTMLSelectElement>(null);
+  const startTimeRef = React.useRef<HTMLInputElement>(null);
+  const endTimeRef = React.useRef<HTMLInputElement>(null);
+  const urlTime = `${process.env.NEXT_PUBLIC_API_BASE}/time/`;
+  const axios = require("axios");
+  const postTimeData = (data: {
+    acountName: string;
+    acountNumber: number;
+    day: number;
+    timearray: string;
+    key: number;
+  }) => {
+    axios
+      .post(urlTime, data)
+      .then((response: {}) => {
+        console.log("timeData");
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const startTime = 9;
+  const endTime = 22;
+
+  const dayToNum = (dayOfWeek: string):number => {
+    if(dayOfWeekRef.current?.value === "1"){
+      return 1;
+    }
+    if(dayOfWeekRef.current?.value === "2"){
+      return 2;
+    }
+    if(dayOfWeekRef.current?.value === "3"){
+      return 3;
+    }
+    if(dayOfWeekRef.current?.value === "4"){
+      return 4;
+    }
+    if(dayOfWeekRef.current?.value === "5"){
+      return 5;
+    }
+    if(dayOfWeekRef.current?.value === "6"){
+      return 6;
+    }
+    if(dayOfWeekRef.current?.value === "7"){
+      return 7;
+    }
+    return 0;
+  };
+  const timeToArray = (startTime: number, endTime: number):string => {
+    var timeArray:string = "";
+    if(startTime===9){
+      timeArray = "1";
+    }
+    else{
+      timeArray = "0";
+    }
+    for (let i = 1; i <= 12; i++) {
+      if (startTime <= i-9 && i-9 < endTime) {
+        timeArray = timeArray + ",0";
+      }
+      timeArray = timeArray + ",1";
+    }
+    return timeArray;
+  };
+
+  const sampleTimeArray = timeToArray(startTime,endTime);
+  console.log(sampleTimeArray);
+    
+
+  const handleSubmit = () => {
+    console.log('選択された曜日の値:', dayOfWeekRef.current?.value);
+    if (
+      dayOfWeekRef.current &&
+      startTimeRef.current &&
+      endTimeRef.current
+    ) {
+      const dataToPost = {
+        acountName: acountName,
+        acountNumber: acountNumber,
+        day: dayToNum(dayOfWeekRef.current.value),
+        timearray: timeToArray(Number(startTimeRef.current.value),Number(endTimeRef.current.value)),
+        key: uuidv4(),
+      };
+      postTimeData(dataToPost);
+    }
+    handleClose();
+  };
 
   if (!modalOpen) {
     return null;
@@ -17,26 +112,83 @@ const Modal: FC<ModalProps> = ({ modalOpen, handleClose, handleSubmit, modalInpu
   return (
     <div className="fixed z-10 top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-80">
       <div className="bg-white rounded-md mt-60 m-auto pt-5 p-10 ">
-        <button className="text-gray-400 float-right text-3xl font-bold hover:text-black focus:text-black" onClick={handleClose}>&times;</button>
+        <button
+          className="text-gray-400 float-right text-3xl font-bold hover:text-black focus:text-black"
+          onClick={handleClose}
+        >
+          &times;
+        </button>
         <div className="mt-4">
-          <label htmlFor="date" className="block text-sm font-medium text-gray-700 text-left">曜日 </label>
-          <select name="曜日" id="day-of-week-list" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-            <option value="1" className="text-center">日</option>
-            <option value="2" className="text-center">月</option>
-            <option value="3" className="text-center">火</option>
-            <option value="4" className="text-center">水</option>
-            <option value="5" className="text-center">木</option>
-            <option value="6" className="text-center">金</option>
-            <option value="7" className="text-center">土</option>
+          <label
+            htmlFor="date"
+            className="block text-sm font-medium text-gray-700 text-left"
+          >
+            曜日{" "}
+          </label>
+          <select
+            name="曜日"
+            id="day-of-week-list"
+            ref={dayOfWeekRef}
+            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          >
+            <option value="1" className="text-center">
+              日
+            </option>
+            <option value="2" className="text-center">
+              月
+            </option>
+            <option value="3" className="text-center">
+              火
+            </option>
+            <option value="4" className="text-center">
+              水
+            </option>
+            <option value="5" className="text-center">
+              木
+            </option>
+            <option value="6" className="text-center">
+              金
+            </option>
+            <option value="7" className="text-center">
+              土
+            </option>
           </select>
         </div>
         <div className="mt-4">
-          <label htmlFor="time" className="block text-sm font-medium text-gray-700 text-left"> 開始時刻 </label>
-          <input type="time" name="開始時刻" className="text-center mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50" min="9:00" max="22:00" step="3600" list="data-list" />
+          <label
+            htmlFor="time"
+            className="block text-sm font-medium text-gray-700 text-left"
+          >
+            {" "}
+            開始時刻{" "}
+          </label>
+          <input
+            type="time"
+            name="開始時刻"
+            className="text-center mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            min="9:00"
+            max="22:00"
+            step="3600"
+            list="data-list"
+          />
         </div>
         <div className="mt-4">
-          <label htmlFor="time" className="block text-sm font-medium text-gray-700 text-left"> 終了時刻 </label>
-          <input type="time" name="終了時刻" className="text-center mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50" min="9:00" max="22:00" step="3600" list="data-list" />
+          <label
+            htmlFor="time"
+            className="block text-sm font-medium text-gray-700 text-left"
+          >
+            {" "}
+            終了時刻{" "}
+          </label>
+          <input
+            type="time"
+            name="終了時刻"
+            className="text-center mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            min="9:00"
+            max="22:00"
+            step="3600"
+            list="data-list"
+          />
           <datalist id="data-list">
             <option value="09:00"></option>
             <option value="10:00"></option>
@@ -55,11 +207,12 @@ const Modal: FC<ModalProps> = ({ modalOpen, handleClose, handleSubmit, modalInpu
           </datalist>
         </div>
         <div className="mt-4">
-          <label htmlFor="text" className="block text-sm font-medium text-gray-700 text-left">理由 </label>
-          <input type="text" className='justify-around mr-2 rounded-sm p-1 placeholder:text-gray-500' ref={modalInputRef} placeholder=' 理由を入力' />
-        </div>
-        <div className="mt-4">
-          <button className="rounded-md border border-black p-1" onClick={handleSubmit}>Submit</button>
+          <button
+            className="rounded-md border border-black p-1"
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
         </div>
       </div>
     </div>
