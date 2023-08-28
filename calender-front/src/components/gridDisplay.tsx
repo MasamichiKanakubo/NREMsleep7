@@ -16,7 +16,7 @@ export const GridDisplay = () => {
   const ex1Array = [0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0];
   const ex2Array = [0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0];
   const ex3Array = [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1];
-  const ex4Array = [1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0];
+  const ex4Array = [1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1];
 
   const ex5Array = [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0];
   const ex6Array = [0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0];
