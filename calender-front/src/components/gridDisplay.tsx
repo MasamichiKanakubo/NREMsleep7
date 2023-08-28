@@ -58,11 +58,23 @@ export const GridDisplay = () => {
     return timeArray;
   }
 
-  const TimeBox: FC<{ times: number[] }> = ({ times }) => {
+  const TimeBox: FC<{ id:number, times: number[] }> = ({ id, times }) => { 
+    const changeBgColor = (id: number):string => {
+      if(id===1){
+        return "bg-pink-300";
+      }
+      if(id===2){
+        return "bg-green-300";
+      }
+      if(id===3){
+        return "bg-blue-300";
+      }
+      return "bg-yellow-300";
+    }
     return (<>{times.map((time: number) => {
       return (
         <>
-          <div className={`w-full block ${time === 1 ? "bg-pink-300" : "bg-white"}`} key={time}> </div>
+          <div className={`w-full block ${time === 1 ? changeBgColor(id) : "bg-white"}`} key={time}> </div>
         </>
       );
     })}</>);
@@ -85,7 +97,7 @@ export const GridDisplay = () => {
                   return (
                     <div key={humanItem.id} className="flex h-full">{
                     }
-                      <TimeBox times={example1[index]} />
+                      <TimeBox id={humanItem.id} times={example1[index]} />
                     </div>
                   )
                 })
