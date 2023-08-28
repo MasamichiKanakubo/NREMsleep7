@@ -15,9 +15,9 @@ const Modal: FC<ModalProps> = ({
   acountName,
   acountNumber,
 }) => {
-  const dayOfWeekRef = React.useRef<HTMLSelectElement>(null);
-  const startTimeRef = React.useRef<HTMLInputElement>(null);
-  const endTimeRef = React.useRef<HTMLInputElement>(null);
+  const dayOfWeekRef = React.useRef<string>("0");
+  const startTimeRef = React.useRef<string>();
+  const endTimeRef = React.useRef<string>(null);
   const urlTime = `${process.env.NEXT_PUBLIC_API_BASE}/time/`;
   const axios = require("axios");
   const postTimeData = (data: {
@@ -37,9 +37,6 @@ const Modal: FC<ModalProps> = ({
         console.log(error);
       });
   };
-
-  const startTime = 9;
-  const endTime = 22;
 
   const dayToNum = (dayOfWeek: string):number => {
     if(dayOfWeekRef.current?.value === "1"){
@@ -65,16 +62,16 @@ const Modal: FC<ModalProps> = ({
     }
     return 0;
   };
-  const timeToArray = (startTime: number, endTime: number):string => {
+  const timeToArray = (startTime: string, endTime: string):string => {
     var timeArray:string = "";
-    if(startTime===9){
+    if(startTime==="9"){
       timeArray = "1";
     }
     else{
       timeArray = "0";
     }
     for (let i = 1; i <= 12; i++) {
-      if (startTime <= i-9 && i-9 < endTime) {
+      if (Number(startTime) <= i-9 && i-9 < Number(endTime)) {
         timeArray = timeArray + ",0";
       }
       timeArray = timeArray + ",1";
@@ -82,26 +79,18 @@ const Modal: FC<ModalProps> = ({
     return timeArray;
   };
 
-  const sampleTimeArray = timeToArray(startTime,endTime);
-  console.log(sampleTimeArray);
-    
-
   const handleSubmit = () => {
     console.log('選択された曜日の値:', dayOfWeekRef.current?.value);
-    if (
-      dayOfWeekRef.current &&
-      startTimeRef.current &&
-      endTimeRef.current
-    ) {
-      const dataToPost = {
-        acountName: acountName,
-        acountNumber: acountNumber,
-        day: dayToNum(dayOfWeekRef.current.value),
-        timearray: timeToArray(Number(startTimeRef.current.value),Number(endTimeRef.current.value)),
-        key: uuidv4(),
-      };
-      postTimeData(dataToPost);
-    }
+    const dataToPost = {
+      acountName: acountName,
+      acountNumber: acountNumber,
+      day: dayToNum(dayOfWeekRef.current.value),
+      timearray: timeToArray(startTimeRef.current.value,endTimeRef.current.value),
+      key: uuidv4(),
+    };
+    console.log("dataToPost");
+    console.log(dataToPost);
+    postTimeData(dataToPost);
     handleClose();
   };
 
