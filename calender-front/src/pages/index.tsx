@@ -126,7 +126,7 @@ export default function App() {
 
   return (
     <div className={style.App}>
-      <WeeklyCalendar timeState={} />
+      <WeeklyCalendar />
       <button
         className="p-1 w-full absolute  top-20 left-[1000px] text-cyan-50 bg-cyan-500"
         onClick={handleDemo}

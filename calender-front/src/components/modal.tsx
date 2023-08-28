@@ -15,7 +15,7 @@ const Modal: FC<ModalProps> = ({
   acountName,
   acountNumber,
 }) => {
-  const dayOfWeekRef = React.useRef<string>("0");
+  const dayOfWeekRef = React.useRef<HTMLSelectElement>(null);
   const startTimeRef = React.useRef<string>();
   const endTimeRef = React.useRef<string>(null);
   const urlTime = `${process.env.NEXT_PUBLIC_API_BASE}/time/`;
@@ -38,7 +38,7 @@ const Modal: FC<ModalProps> = ({
       });
   };
 
-  const dayToNum = (dayOfWeek: string):number => {
+  const dayToNum = ():number => {
     if(dayOfWeekRef.current?.value === "1"){
       return 1;
     }
@@ -109,14 +109,14 @@ const Modal: FC<ModalProps> = ({
         </button>
         <div className="mt-4">
           <label
-            htmlFor="date"
+            htmlFor="day"
             className="block text-sm font-medium text-gray-700 text-left"
           >
-            曜日{" "}
+            曜日
           </label>
           <select
             name="曜日"
-            id="day-of-week-list"
+            id="day"
             ref={dayOfWeekRef}
             className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           >
@@ -145,55 +145,117 @@ const Modal: FC<ModalProps> = ({
         </div>
         <div className="mt-4">
           <label
-            htmlFor="time"
+            htmlFor="start-time"
             className="block text-sm font-medium text-gray-700 text-left"
           >
-            {" "}
-            開始時刻{" "}
+            開始時刻
           </label>
-          <input
-            type="time"
+          <select
             name="開始時刻"
-            className="text-center mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            min="9:00"
-            max="22:00"
-            step="3600"
-            list="data-list"
-          />
-        </div>
+            id="start-time"
+            ref={dayOfWeekRef}
+            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          >
+            <option value="9" className="text-center">
+               9:00
+            </option>
+            <option value="10" className="text-center">
+              10:00
+            </option>
+            <option value="11" className="text-center">
+              11:00
+            </option>
+            <option value="12" className="text-center">
+              12:00
+            </option>
+            <option value="13" className="text-center">
+              13:00
+            </option>
+            <option value="14" className="text-center">
+              14:00
+            </option>
+            <option value="15" className="text-center">
+              15:00
+            </option>
+            <option value="16" className="text-center">
+              16:00
+            </option>
+            <option value="17" className="text-center">
+              17:00
+            </option>
+            <option value="18" className="text-center">
+              18:00
+            </option>
+            <option value="19" className="text-center">
+              19:00
+            </option>
+            <option value="20" className="text-center">
+              20:00
+            </option>
+            <option value="21" className="text-center">
+              21:00
+            </option>
+            <option value="22" className="text-center">
+              22:00
+            </option>
+          </select>
+        </div> 
         <div className="mt-4">
           <label
-            htmlFor="time"
+            htmlFor="end-time"
             className="block text-sm font-medium text-gray-700 text-left"
           >
-            {" "}
-            終了時刻{" "}
+            終了時刻
           </label>
-          <input
-            type="time"
+          <select
             name="終了時刻"
-            className="text-center mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            min="9:00"
-            max="22:00"
-            step="3600"
-            list="data-list"
-          />
-          <datalist id="data-list">
-            <option value="09:00"></option>
-            <option value="10:00"></option>
-            <option value="11:00"></option>
-            <option value="12:00"></option>
-            <option value="13:00"></option>
-            <option value="14:00"></option>
-            <option value="15:00"></option>
-            <option value="16:00"></option>
-            <option value="17:00"></option>
-            <option value="18:00"></option>
-            <option value="19:00"></option>
-            <option value="20:00"></option>
-            <option value="21:00"></option>
-            <option value="22:00"></option>
-          </datalist>
+            id="end-time"
+            ref={dayOfWeekRef}
+            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          >
+            <option value="9" className="text-center">
+               9:00
+            </option>
+            <option value="10" className="text-center">
+              10:00
+            </option>
+            <option value="11" className="text-center">
+              11:00
+            </option>
+            <option value="12" className="text-center">
+              12:00
+            </option>
+            <option value="13" className="text-center">
+              13:00
+            </option>
+            <option value="14" className="text-center">
+              14:00
+            </option>
+            <option value="15" className="text-center">
+              15:00
+            </option>
+            <option value="16" className="text-center">
+              16:00
+            </option>
+            <option value="17" className="text-center">
+              17:00
+            </option>
+            <option value="18" className="text-center">
+              18:00
+            </option>
+            <option value="19" className="text-center">
+              19:00
+            </option>
+            <option value="20" className="text-center">
+              20:00
+            </option>
+            <option value="21" className="text-center">
+              21:00
+            </option>
+            <option value="22" className="text-center">
+              22:00
+            </option>
+          </select>
         </div>
         <div className="mt-4">
           <button
