@@ -6,12 +6,23 @@ export type SettingModalProps = {
 }
 
 const SettingModal: FC<SettingModalProps> = ({ handleSettingClose }) => {
+
     const dayModalInputRef = useRef<HTMLInputElement>(null);
-    const timeModalImputRef = useRef<HTMLInputElement>(null);
+    const timeModalInputRef = useRef<HTMLInputElement>(null);
 
     const handleSetting = () => {
-        const dateInput = dayModalInputRef;
-        const endTimeInput = timeModalImputRef;
+        const selectDate = dayModalInputRef.current?.value;
+        const selectedTime = timeModalInputRef.current?.value;
+        if (selectedTime && selectDate) {
+            const [hours, minutes] = selectedTime.split(":").map(Number);
+            const endTime = new Date(selectDate);
+            endTime.setHours(hours);
+            endTime.setMinutes(minutes);
+            // endTime に設定した時刻と今日の日時の差を計算
+            const timeDifferenceFromNow = endTime.getTime() - Date.now();
+            console.log("Time difference from now:", timeDifferenceFromNow);
+        }
+
         handleSettingClose();
     };
 
@@ -21,11 +32,12 @@ const SettingModal: FC<SettingModalProps> = ({ handleSettingClose }) => {
                 <button className="text-gray-400 float-right text-3xl font-bold hover:text-black focus:text-black" onClick={handleSettingClose}>&times;</button>
                 <div className="mt-4">
                     <label htmlFor="date" className="block text-sm font-medium text-gray-700 text-left"> 終了日 </label>
-                    <input type="date" name="終了日" className="text-center mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ref={dayModalInputRef}/>
+                    <input type="date" name="終了日" className="text-center mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ref={dayModalInputRef}
+                    />
                 </div>
                 <div className="mt-4">
                     <label htmlFor="time" className="block text-sm font-medium text-gray-700 text-left"> 終了時刻 </label>
-                    <input type="time" name="終了時刻" className="text-center mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50" min="9:00" max="22:00" step="3600" list="data-list" ref={timeModalImputRef}/>
+                    <input type="time" name="終了時刻" className="text-center mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50" min="9:00" max="22:00" step="3600" list="data-list" ref={timeModalInputRef} />
                     <datalist id="data-list">
                         <option value="00:00"></option>
                         <option value="01:00"></option>
