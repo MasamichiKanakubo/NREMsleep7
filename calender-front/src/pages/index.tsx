@@ -6,6 +6,7 @@ import LoginModel from "../components/loginmodel";
 import Roulettemodal from "../components/roulettemodal";
 import uuid from "react-uuid";
 
+
 export type timeStateType = {
   acountName: string;
   acountNumber: number;
@@ -143,7 +144,7 @@ export default function App() {
       >
         roulette
       </button>
-      {isRouletteShow && <Roulettemodal />}
+      {isRouletteShow && <RouletteModal closeModal={closeRouletteModal} />}
       <button
         className="p-1 w-full absolute  top-2 left-[1000px] text-cyan-50 bg-cyan-500"
         onClick={() => setIsLoginShow((prev) => !prev)}
